@@ -5,10 +5,12 @@ const fs = require('fs');
  * @param {string} path File path
  */
 function countStudents(path) {
-  const courseData = {};
   try {
     const studentData = fs.readFileSync(path, { encoding: 'utf8' });
-    const students = studentData.split('\n').slice(1);
+    const students = studentData
+      .split('\n')
+      .filter((line) => line.trim() !== '')
+      .slice(1);
 
     // Filter out empty or malformed lines
     const validStudents = students.filter((student) => {
@@ -18,6 +20,7 @@ function countStudents(path) {
 
     console.log('Number of students:', validStudents.length);
 
+    const courseData = {};
     for (const student of validStudents) {
       const data = student.split(',');
       const course = data[3].trim();
