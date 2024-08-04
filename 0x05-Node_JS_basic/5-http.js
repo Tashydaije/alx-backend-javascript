@@ -15,7 +15,7 @@ const app = http.createServer(async (request, response) => {
         message += studentMessage;
         response.writeHead(200, { 'Content-Type': 'text/plain' });
       } catch (error) {
-        message = 'Cannot load the database';
+        message = 'Cannot load the database\n';
         response.writeHead(500, { 'Content-Type': 'text/plain' });
       }
       response.end(message);
